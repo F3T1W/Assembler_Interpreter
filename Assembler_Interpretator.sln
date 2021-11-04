@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31321.278
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Assembler_Interpretator", "Assembler_Interpretator.csproj", "{ADFAD2E9-61A4-457D-B01C-088AAF56C60E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{ADFAD2E9-61A4-457D-B01C-088AAF56C60E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ADFAD2E9-61A4-457D-B01C-088AAF56C60E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ADFAD2E9-61A4-457D-B01C-088AAF56C60E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ADFAD2E9-61A4-457D-B01C-088AAF56C60E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {39FBACA8-5E3F-4D9B-A900-159FB1C4DDF9}
+	EndGlobalSection
+EndGlobal
