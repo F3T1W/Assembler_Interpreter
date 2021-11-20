@@ -7,11 +7,6 @@ namespace Assembler_Interpretator
     {
         class Context
         {
-            public int GetValue(string key, Dictionary<string, int> rega)
-            {
-                return int.TryParse(key, out var val) ? val : rega[key];
-            }
-
             private IStrategy _strategy;
 
             public Context()
@@ -33,40 +28,48 @@ namespace Assembler_Interpretator
         }
         public interface IStrategy
         {
-            Dictionary<string, int> DoAlgorithm(Dictionary<string, int> dict);
+            Dictionary<string, int> DoAlgorithm(Dictionary<string, int> dict, int[] arr, ref int x);
         }
         class MoveTask : IStrategy
         {
-            public Dictionary<string, int> DoAlgorithm(Dictionary<string, int> dict)
+            public Dictionary<string, int> DoAlgorithm(Dictionary<string, int> dict, int[] arr, ref int x)
             {
-                throw new NotImplementedException();
+                dict[arr[1].ToString()] = (arr[2]);
+                return dict;
             }
         }
         class IncTask : IStrategy
         {
-            public Dictionary<string, int> DoAlgorithm(Dictionary<string, int> dict)
+            public Dictionary<string, int> DoAlgorithm(Dictionary<string, int> dict, int[] arr, ref int x)
             {
-                throw new NotImplementedException();
+                dict[arr[1].ToString()]++;
+                return dict;
             }
         }
 
         class DecTask : IStrategy
         {
-            public Dictionary<string, int> DoAlgorithm(Dictionary<string, int> dict)
+            public Dictionary<string, int> DoAlgorithm(Dictionary<string, int> dict, int[] arr, ref int x)
             {
-                throw new NotImplementedException();
+                dict[arr[1].ToString()]--;
+                return dict;
             }
         }
         class JnzTask : IStrategy
         {
-            public Dictionary<string, int> DoAlgorithm(Dictionary<string, int> dict)
+            public void ChangeI(Dictionary<string, int> dict, int[] arr, ref int x)
             {
-                    throw new NotImplementedException();
+                x += dict[arr[1].ToString()] != 0 ? arr[2] - 1 : 0;
+            }
+            public Dictionary<string, int> DoAlgorithm(Dictionary<string, int> dict, int[] arr, ref int x)
+            {
+                ChangeI(dict, arr,ref x);
+                return dict;
             }
         }
         static Dictionary<string, int> Interpret(string[] program, Dictionary<string, int> regi)
         {
-            var context = new Context();
+            Context context = new Context();
             for (var i = 0; i < program.Length; i++)
             {
                 var values = program[i].Split();
