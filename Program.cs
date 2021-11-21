@@ -5,68 +5,6 @@ namespace Assembler_Interpretator
 {
     class Program
     {
-        class Context
-        {
-            private IStrategy _strategy;
-
-            public Context()
-            { }
-
-
-            public Context(IStrategy strategy)
-            {
-                this._strategy = strategy;
-            }
-
-
-            public void SetStrategy(IStrategy strategy)
-            {
-                this._strategy = strategy;
-            }
-
-            virtual public void DoSomeBusinessLogic() { }
-        }
-        public interface IStrategy
-        {
-            Dictionary<string, int> DoAlgorithm(Dictionary<string, int> dict, int[] arr, ref int x);
-        }
-        class MoveTask : IStrategy
-        {
-            public Dictionary<string, int> DoAlgorithm(Dictionary<string, int> dict, int[] arr, ref int x)
-            {
-                dict[arr[1].ToString()] = (arr[2]);
-                return dict;
-            }
-        }
-        class IncTask : IStrategy
-        {
-            public Dictionary<string, int> DoAlgorithm(Dictionary<string, int> dict, int[] arr, ref int x)
-            {
-                dict[arr[1].ToString()]++;
-                return dict;
-            }
-        }
-
-        class DecTask : IStrategy
-        {
-            public Dictionary<string, int> DoAlgorithm(Dictionary<string, int> dict, int[] arr, ref int x)
-            {
-                dict[arr[1].ToString()]--;
-                return dict;
-            }
-        }
-        class JnzTask : IStrategy
-        {
-            public void ChangeI(Dictionary<string, int> dict, int[] arr, ref int x)
-            {
-                x += dict[arr[1].ToString()] != 0 ? arr[2] - 1 : 0;
-            }
-            public Dictionary<string, int> DoAlgorithm(Dictionary<string, int> dict, int[] arr, ref int x)
-            {
-                ChangeI(dict, arr,ref x);
-                return dict;
-            }
-        }
         static Dictionary<string, int> Interpret(string[] program, Dictionary<string, int> regi)
         {
             Context context = new Context();
@@ -77,19 +15,19 @@ namespace Assembler_Interpretator
                 {
                     case "mov":
                         context.SetStrategy(new MoveTask());
-                        context.DoSomeBusinessLogic();
+                        context.DoSomeBusinessLogic(regi, values ,ref i);
                         break;
                     case "inc":
                         context.SetStrategy(new IncTask());
-                        context.DoSomeBusinessLogic();
+                        context.DoSomeBusinessLogic(regi, values, ref i);
                         break;
                     case "dec":
                         context.SetStrategy(new DecTask());
-                        context.DoSomeBusinessLogic();
+                        context.DoSomeBusinessLogic(regi, values, ref i);
                         break;
                     case "jnz":
                         context.SetStrategy(new JnzTask());
-                        context.DoSomeBusinessLogic();
+                        context.DoSomeBusinessLogic(regi, values, ref i);
                         break;
                     default:
                         throw new ArgumentOutOfRangeException();
