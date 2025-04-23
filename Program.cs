@@ -1,13 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using Assembler_Interpretator.Tasks;
 
 namespace Assembler_Interpretator
 {
-    class Program
+    public static class Program
     {
-        static Dictionary<string, int> Interpret(string[] program, Dictionary<string, int> regi)
+        private static void Interpret(string[] program, Dictionary<string, int> regi)
         {
-            Context context = new Context();
+            var context = new Context();
             for (var i = 0; i < program.Length; i++)
             {
                 var values = program[i].Split();
@@ -15,30 +16,29 @@ namespace Assembler_Interpretator
                 {
                     case "mov":
                         context.SetStrategy(new MoveTask());
-                        context.DoSomeBusinessLogic(regi, values ,ref i);
                         break;
                     case "inc":
                         context.SetStrategy(new IncTask());
-                        context.DoSomeBusinessLogic(regi, values, ref i);
                         break;
                     case "dec":
                         context.SetStrategy(new DecTask());
-                        context.DoSomeBusinessLogic(regi, values, ref i);
                         break;
                     case "jnz":
                         context.SetStrategy(new JnzTask());
-                        context.DoSomeBusinessLogic(regi, values, ref i);
                         break;
                     default:
-                        throw new ArgumentOutOfRangeException();
+                        Console.WriteLine("Unknown strategy");
+                        break;
                 }
+
+                context.DoSomeBusinessLogic(regi, values ,ref i);
             }
-            return regi;
         }
-        static void Main(string[] args)
+
+        private static void Main()
         {
             var registers = new Dictionary<string, int>();
-            Interpret(new[] {"mov a 5", "inc a", "dec a", "dec a", "jnz a -1", "inc a" }, registers);
+            Interpret(new[] { "mov a 5", "inc a", "dec a", "dec a", "jnz a -1", "inc a" }, registers);
         }
     }
 }

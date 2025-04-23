@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace Assembler_Interpretator
 {
-    interface IStrategy
+    internal interface IStrategy
     {
-        Dictionary<string, int> DoAlgorithm(Dictionary<string, int> dict, string[] arr, ref int x);
+        void DoAlgorithm(Dictionary<string, int> dict, string[] arr, ref int x);
     }
 }
