@@ -9,8 +9,4 @@
     <EditorConfigFiles Remove=".editorconfig" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Content Include="Assembler_Interpretator.sln.DotSettings.user" />
-  </ItemGroup>
-
 </Project>
